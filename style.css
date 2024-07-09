@@ -36,3 +36,10 @@ padding: 15px;
 
   left: 50%;
 }
+
+
+@media (max-width: 480px) {
+  .container {
+    display: block;
+  }
+}
