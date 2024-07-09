@@ -42,4 +42,5 @@ padding: 15px;
   .container {
     display: block;
   }
+  pre{padding-bottom: 10px;}
 }
