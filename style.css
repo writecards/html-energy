@@ -1,0 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  color: rgb(75, 205, 99);
+  text-shadow: 1px 1px 30px rgb(118, 234, 120);
+}
