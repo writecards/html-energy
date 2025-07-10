@@ -78,25 +78,26 @@
 
       <div class="flowers">
         <pre>
-      wWWWw               wWWWw
-      vVVVv (___) wWWWw         (___)  vVVVv
-      (___)  ~Y~  (___)  vVVVv   ~Y~   (___)
-       ~Y~   \|    ~Y~   (___)    |/    ~Y~
-       \|   \ |/   \| /  \~Y~/   \|    \ |/
-      \\|// \\|// \\|/// \\|//  \\|// \\\|///
-    </pre
-        >
+          
+        </pre>
+      </div>
+
+      <!-- sign up section? we need to store their info and update the grid  -->
+      <div style="position: absolute; left: 65%; top: 5%; transform: translateX(-50%); display: flex; align-items: center; justify-content: center;">
+        <p style="margin-right: 10px;"> Join the park:</p>
+        <input type="text" id="nameInput" placeholder="Enter your name" style="padding: 5px; margin-right: 10px; border-radius: 0; border-width: 1px; height: 25px; box-sizing: border-box;">
+        <button onclick="addNameToGrid()" style="padding: 5pxpx; border-radius: 0; border-width: 1px; height: 25px; box-sizing: border-box;">我确定会来</button>
       </div>
 
       <div class="picnic-grid">
-        <div class="box" id="div1"></div>
+        <div class="box" id="div1">中山公园 Zhongshan Park</div>
         <div class="box" id="div2"></div>
         <div class="box" id="div3"></div>
         <div class="box" id="div4"></div>
         <div class="box" id="div5"></div>
         <div class="box" id="div6"></div>
         <div class="box" id="div7">
-          <p class="boxtext">august 1, 2025 16:30-19:00 (tentative)</p>
+          <p class="boxtext">August 1, 2025 16:30-19:00 (tentative)</p>
         </div>
         <div class="box" id="div8"></div>
         <div class="box" id="div9"></div>
@@ -104,7 +105,7 @@
           <p class="boxtext">yuemin</p>
         </div>
         <div class="box" id="div11">
-          <p class="boxtext">zhongshan park</p>
+          <p class="boxtext"></p>
         </div>
         <div class="box" id="div12"></div>
         <div class="box" id="div13"></div>
@@ -121,5 +122,82 @@
         <div class="box" id="div20"></div>
       </div>
     </div>
+    
+    <script>
+      function addNameToGrid() {
+        const nameInput = document.getElementById('nameInput');
+        const name = nameInput.value.trim();
+        
+        if (name === '') {
+          alert('无名氏？');
+          return;
+        }
+        // Get all divs in the picnic grid
+        const gridDivs = document.querySelectorAll('.picnic-grid .box');
+        
+        // Find empty divs (divs with no text content or only whitespace)
+        const emptyDivs = Array.from(gridDivs).filter(div => {
+          const textContent = div.textContent.trim();
+          return textContent === '';
+        });
+        if (emptyDivs.length === 0) {
+          alert('来晚了，但也许你可以直接当天过来');
+          return;
+        }
+        // Pick a random empty div
+        const randomIndex = Math.floor(Math.random() * emptyDivs.length);
+        const selectedDiv = emptyDivs[randomIndex];
+        
+        // Add the name to the selected div
+        selectedDiv.innerHTML = `<p class="boxtext">${name}</p>`;
+        
+        // Clear the input field
+        nameInput.value = '';
+        
+        // Update the flowers to match the number of people
+        updateFlowers();
+        
+        // Optional: Show a success message
+        alert(`${name} 进入了公园!`);
+      }
+      
+      function updateFlowers() {
+        // Count how many people are in the grid
+        const gridDivs = document.querySelectorAll('.picnic-grid .box');
+        const peopleCount = Array.from(gridDivs).filter(div => {
+          const textContent = div.textContent.trim();
+          return textContent !== '';
+        }).length;
+        
+        // Get the flowers element
+        const flowersElement = document.querySelector('.flowers pre');
+        
+        // Create ASCII flowers based on the count
+        let flowers = '';
+        const flowerLines = [
+          'wWWWw',
+          'vVVVv',
+          '(___)',
+          ' ~Y~ ',
+          ' \|/ ',
+          '\\|//'
+        ];
+        
+        // Create horizontal layout
+        for (let lineIndex = 0; lineIndex < flowerLines.length; lineIndex++) {
+          let line = '';
+          for (let i = 0; i < peopleCount; i++) {
+            line += flowerLines[lineIndex] + '   ';
+          }
+          flowers += line + '\n';
+        }
+        
+        // Update the flowers display
+        flowersElement.textContent = flowers;
+      }
+      
+      // Initialize flowers on page load
+      window.addEventListener('load', updateFlowers);
+    </script>
   </body>
 </html>
