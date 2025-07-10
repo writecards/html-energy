@@ -1,15 +1,74 @@
 * {
   margin: 0;
-  padding-top: 20px;
 }
+html,
 body {
   color: rgb(75, 205, 99);
   text-shadow: 1px 1px 10px rgb(118, 234, 120);
-  place-items: center;
+  height: 100%;
+  background-size: cover;
+  background: #080073;
+  /* background: linear-gradient(
+    0deg,
+    rgba(8, 0, 115, 1) 1%,
+    rgba(33, 9, 121, 1) 12%,
+    rgba(28, 42, 143, 1) 27%,
+    rgba(0, 176, 212, 0) 99%,
+    rgba(0, 212, 255, 0.3) 100%
+  ); */
+  background: #0f00e6;
+  background: linear-gradient(
+    0deg,
+    rgba(15, 0, 230, 1) 1%,
+    rgba(30, 7, 141, 1) 30%,
+    rgba(28, 42, 143, 1) 75%
+  );
 }
 
+.big-parent {
+  display: flex;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0%;
+}
+
+.description-text {
+  line-height: 105%;
+  width: 40%;
+
+  padding-left: 5%;
+  padding-top: 5%;
+  margin: 10px;
+  position: relative;
+}
+.question {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+a {
+  color: inherit;
+}
+
+.flowers {
+  height: 200px;
+  width: 100px;
+  position: absolute;
+  left: 55%;
+  top: 70%;
+}
+
+.picnic-grid {
+  margin-top: 100px;
+  display: grid;
+  grid-template-columns: repeat(5, 0fr);
+  grid-template-rows: repeat(5, 0fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  height: 400px;
+}
 .box {
-  border: 1px rgb(91, 169, 125) dotted;
+  border: 1px rgb(91, 169, 125) dashed;
   height: 100px;
   width: 125px;
   display: flex;
@@ -18,20 +77,6 @@ body {
   text-align: center;
   position: relative;
   margin: auto;
-}
-.boxtext {
-  margin-bottom: 35px;
-}
-.parent {
-  display: grid;
-
-  grid-template-columns: repeat(5, 0fr);
-  grid-template-rows: repeat(5, 0fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-}
-.flowers {
-  padding-top: 3%;
 }
 
 #div1 {
