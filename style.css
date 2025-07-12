@@ -33,15 +33,21 @@ body {
   grid-row-gap: 0%;
 }
 
-.description-text {
+.left-side {
   line-height: 105%;
   width: 40%;
-
   padding-left: 5%;
   padding-top: 5%;
   margin: 10px;
   position: relative;
 }
+
+.right-side {
+  width: 60%;
+  padding-right: 5%;
+  padding-top: 5%;
+}
+
 .question {
   padding-top: 10px;
   padding-bottom: 10px;
