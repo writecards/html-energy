@@ -41,18 +41,20 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   gap: 0.5rem;
 }
 
 .input-section > :first-child {
-  width: 8rem;
+  width: 5rem;
   text-align: left;
 }
 
 .input-section > :nth-child(2) {
-  width: 10.5rem;
+  width: 9rem;
+  height: 2rem;
 
-  border-style: dotted;
+  border-style: inset;
   border-width: 2px;
   border-color: var(--grass-color);
   background-color: white;
@@ -60,7 +62,7 @@ body {
 }
 
 .input-section > :last-child {
-  width: 8rem;
+  width: 5rem;
   text-align: right;
 }
 
