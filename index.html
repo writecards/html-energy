@@ -98,71 +98,71 @@
         class="flex flex-col gap-6 lg:col-span-1 lg:row-span-1 min-w-md max-w-lg"
       >
         <!-- 报名表单 -->
-        <div class="max-w-md garden-border green-text">
-          <h2 class="flex flex-row justify-between mb-2 dark-green-text">
-            <div>加入公园</div>
-            <div>🌳🌳🌳🌳🌳🌳🌳</div>
-            <div>Join the park</div>
-          </h2>
+        <div class="max-w-md green-text">
           <form id="rsvp-form" class="flex flex-col gap-2">
-            <div class="input-section">
-              <div>你的邮箱 →</div>
-              <input
-                type="email"
-                id="emailInput"
-                placeholder="电子邮件 / Email"
-                required
-              />
-              <div>← Your Email</div>
-            </div>
-            <div class="input-section">
-              <div>你的名字 →</div>
-              <input
-                type="text"
-                class="input-box w-42"
-                id="nameInput"
-                placeholder="名字 / Name"
-                required
-              />
-              <div>← Your Name</div>
-            </div>
+            <fieldset class="garden-border px-4 pb-2">
+              <legend class="px-2 dark-green-text text-center">
+                <span>加入公园 🌳🌳🌳🌳🌳🌳🌳 Join the park</span>
+              </legend>
+              <div class="input-section">
+                <div>你的邮箱 →</div>
+                <input
+                  type="email"
+                  id="emailInput"
+                  placeholder="电子邮件 / Email"
+                  required
+                />
+                <div>← Your Email</div>
+              </div>
+              <div class="input-section">
+                <div>你的名字 →</div>
+                <input
+                  type="text"
+                  class="input-box w-42"
+                  id="nameInput"
+                  placeholder="名字 / Name"
+                  required
+                />
+                <div>← Your Name</div>
+              </div>
 
-            <div class="input-section">
-              <div>选个颜色 →</div>
-              <input
-                type="color"
-                class="input-box w-42"
-                id="colorInput"
-                placeholder="颜色 / Color"
-                required
-              />
-              <div>← Color</div>
-            </div>
+              <div class="input-section">
+                <div>选个颜色 →</div>
+                <input
+                  type="color"
+                  class="input-box w-42"
+                  id="colorInput"
+                  placeholder="颜色 / Color"
+                  required
+                />
+                <div>← Pick a Color</div>
+              </div>
 
-            <div class="input-section">
-              <div>来吗？ →</div>
-              <select id="rsvpStatus" class="w-42" required>
-                <option value="">咋说? / Yeah?</option>
-                <option value="Going">确定会来/ Going</option>
-                <option value="Maybe">可能来 / Maybe</option>
-                <option value="Can't come">不能来 / Can't come</option>
-              </select>
-              <div>← Will you come?</div>
-            </div>
-
-            <div
-              class="flex flex-row justify-between items-center mb-2 dark-green-text garden-border"
-            >
-              <div>🌳🌳🌳🌳🌳🌳</div>
-              <button
-                type="submit"
-                class="cursor-pointer bg-gray-100 hover:bg-gray-200 border-2 border-gray-300 border-dashed w-42"
-                onclick="submitForm()"
+              <div class="input-section">
+                <div>来吗？ →</div>
+                <select id="rsvpStatus" class="w-42" required>
+                  <option value="">咋说? / Yeah?</option>
+                  <option value="Going">确定会来/ Going</option>
+                  <option value="Maybe">可能来 / Maybe</option>
+                  <option value="Can't come">不能来 / Can't come</option>
+                </select>
+                <div>← Will you come?</div>
+              </div>
+              <hr class="my-4 border-dotted border-green-500" />
+              <div
+                class="flex flex-row justify-between items-center mb-2 dark-green-text"
               >
-                提交 / Submit
-              </button>
-              <div>🌳🌳🌳🌳🌳🌳</div>
-            </div>
+                <div>🌳🌳🌳🌳🌳🌳</div>
+                <button
+                  type="submit"
+                  class="cursor-pointer bg-gray-100 hover:bg-gray-200 border-2 border-gray-300 border-dashed w-42"
+                  onclick="submitForm()"
+                >
+                  提交 / Submit
+                </button>
+                <div>🌳🌳🌳🌳🌳🌳</div>
+              </div>
+            </fieldset>
           </form>
         </div>
       </section>
