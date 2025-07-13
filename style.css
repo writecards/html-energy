@@ -80,3 +80,21 @@ body {
   border-width: 2px;
   border-color: rgb(87, 217, 87);
 }
+
+:root {
+  --grass-color: rgb(87, 217, 87);
+}
+
+.grass-pixel-art {
+  box-shadow: 10px 8px 0 0 var(--grass-color), 14px 8px 0 0 var(--grass-color),
+    6px 10px 0 0 var(--grass-color), 12px 10px 0 0 var(--grass-color),
+    8px 12px 0 0 var(--grass-color), 12px 12px 0 0 var(--grass-color),
+    10px 14px 0 0 var(--grass-color), 28px 18px 0 0 var(--grass-color),
+    18px 20px 0 0 var(--grass-color), 26px 20px 0 0 var(--grass-color),
+    18px 22px 0 0 var(--grass-color), 24px 22px 0 0 var(--grass-color),
+    20px 24px 0 0 var(--grass-color), 22px 24px 0 0 var(--grass-color),
+    26px 24px 0 0 var(--grass-color), 22px 26px 0 0 var(--grass-color);
+  height: 2px;
+  width: 2px;
+  z-index: -1;
+}

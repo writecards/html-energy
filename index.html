@@ -102,7 +102,7 @@
           <form id="rsvp-form" class="flex flex-col gap-2">
             <fieldset class="garden-border px-4 pb-2">
               <legend class="px-2 dark-green-text text-center">
-                <span>加入公园 🌳🌳🌳🌳🌳🌳🌳 Join the park</span>
+                <span>*･｡.★ 加入公园 .:*･ﾟ Join the park .:*･ﾟ★</span>
               </legend>
               <div class="input-section">
                 <div>你的邮箱 →</div>
@@ -152,7 +152,7 @@
               <div
                 class="flex flex-row justify-between items-center mb-2 dark-green-text"
               >
-                <div>🌳🌳🌳🌳🌳🌳</div>
+                <div>｀、ヽ｀、｀、ヽ</div>
                 <button
                   type="submit"
                   class="cursor-pointer bg-gray-100 hover:bg-gray-200 border-2 border-gray-300 border-dashed w-42"
@@ -160,12 +160,38 @@
                 >
                   提交 / Submit
                 </button>
-                <div>🌳🌳🌳🌳🌳🌳</div>
+                <div>｀、ヽ｀、｀、ヽ</div>
               </div>
             </fieldset>
           </form>
         </div>
+        <!-- <div class="grass-pixel-art"></div> -->
       </section>
     </div>
   </body>
+
+  <script>
+    function placeRandomGrass(count) {
+      const OPACITY_RANGE = [0.2, 0.8];
+      const HORIZONTAL_STEPS = 50;
+      const VERTICAL_STEPS = 20;
+      for (let i = 0; i < count; i++) {
+        const grass = document.createElement('div');
+        grass.className = 'grass-pixel-art';
+        grass.style.position = 'absolute';
+        grass.style.left =
+          Math.floor(Math.random() * HORIZONTAL_STEPS) * 2 + '%'; // 50 horizontal steps
+        grass.style.top = Math.floor(Math.random() * VERTICAL_STEPS) * 5 + '%'; // 20 vertical steps
+        grass.style.opacity =
+          Math.random() * (OPACITY_RANGE[1] - OPACITY_RANGE[0]) +
+          OPACITY_RANGE[0]; // Random opacity between 0.5 and 1
+        document.body.appendChild(grass);
+      }
+    }
+
+    // Place 20 random grass pixels when page loads
+    window.addEventListener('load', () => {
+      placeRandomGrass(100);
+    });
+  </script>
 </html>
