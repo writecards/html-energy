@@ -89,8 +89,11 @@ body {
   );
 }
 
-.garden-border {
+.garden-padding {
   padding: 0.5rem;
+}
+
+.garden-border {
   border-style: dotted;
   border-width: 2px;
   border-color: var(--garden-border-color);

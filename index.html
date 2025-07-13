@@ -11,7 +11,7 @@
 
   <body class="green-gradient-bg w-screen min-h-screen">
     <div
-      class="p-4 sm:p-6 md:p-8 lg:p-16 flex flex-col lg:flex-row gap-8 align-center"
+      class="px-2 py-4 sm:p-6 md:p-8 lg:p-16 flex flex-col lg:flex-row gap-8 align-center"
     >
       <!-- Left Side -->
       <section class="flex flex-col gap-6 green-text max-w-md m-auto">
@@ -19,7 +19,7 @@
         <h1 class="text-xl font-bold">HTML Day 2025 Shanghai</h1>
 
         <!-- 中文介绍 CHN Description -->
-        <section class="flex flex-col gap-2 garden-border">
+        <section class="flex flex-col gap-2 garden-border garden-padding">
           <div class="question">
             <h2>这是什么？</h2>
             <p>一年一度的在公园里一起写网页的活动</p>
@@ -57,7 +57,7 @@
         </section>
 
         <!-- 英文介绍 EN Description -->
-        <section class="flex flex-col gap-2 garden-border">
+        <section class="flex flex-col gap-2 garden-border garden-padding">
           <div class="question">
             <h2>What is this?</h2>
             <p>A yearly event where we write HTML together in a park</p>
@@ -127,18 +127,6 @@
                 <div>← Name</div>
               </div>
 
-              <!-- <div class="input-section">
-                <div>选个颜色 →</div>
-                <input
-                  type="color"
-                  class="input-box w-42"
-                  id="color-input"
-                  placeholder="颜色 / Color"
-                  required
-                />
-                <div>← Pick a Color</div>
-              </div> -->
-
               <div class="input-section">
                 <div>来吗？ →</div>
                 <select id="rsvp-status" class="w-42" required>
@@ -153,22 +141,24 @@
               <div
                 class="flex flex-row justify-between items-center mb-2 dark-green-text"
               >
-                <div>｀、ヽ｀、｀、ヽ</div>
+                <div>｀、ヽ｀、<span class="hidden lg:inline">ヽ｀</span></div>
                 <button
                   type="submit"
                   id="submit-button"
-                  class="cursor-pointer bg-gray-100 hover:bg-gray-200 border-2 border-gray-300 border-dashed w-42"
+                  class="cursor-pointer bg-gray-100 hover:bg-gray-200 border-2 border-gray-300 border-dashed w-38"
                 >
                   提交 / Submit
                 </button>
-                <div>｀、ヽ｀、｀、ヽ</div>
+                <div class="-scale-100">
+                  ｀、ヽ｀、<span class="hidden lg:inline">ヽ｀</span>
+                </div>
               </div>
             </fieldset>
           </form>
         </section>
 
         <!-- 草坪 Grass field -->
-        <div class="grass-field w-full h-full"></div>
+        <div class="grass-field w-full h-full garden-border"></div>
       </section>
     </div>
   </body>
