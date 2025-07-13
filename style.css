@@ -3,6 +3,19 @@ body {
   font-family: 'Times New Roman', Times, serif;
 }
 
+:root {
+  --dark-green-text-color: rgb(39, 117, 53);
+  --green-text-color: rgb(56, 169, 77);
+  --green-text-shadow-color: rgb(118, 234, 120);
+
+  --light-green-text-color: rgb(174, 237, 175);
+
+  --garden-border-color: rgb(37, 118, 37);
+  --garden-border-shadow-color: rgb(118, 234, 120);
+
+  --grass-color: rgb(87, 217, 87);
+}
+
 /*
   Question
 */
@@ -41,7 +54,7 @@ body {
 
   border-style: dotted;
   border-width: 2px;
-  border-color: rgb(87, 217, 87);
+  border-color: var(--grass-color);
   background-color: white;
   text-align: center;
 }
@@ -56,13 +69,13 @@ body {
 */
 
 .dark-green-text {
-  color: rgb(39, 117, 53);
-  text-shadow: 1px 1px 10px rgb(118, 234, 120);
+  color: var(--dark-green-text-color);
+  text-shadow: 1px 1px 10px var(--green-text-shadow-color);
 }
 
 .green-text {
-  color: rgb(56, 169, 77);
-  text-shadow: 1px 1px 10px rgb(86, 202, 88);
+  color: var(--green-text-color);
+  text-shadow: 1px 1px 10px var(--green-text-shadow-color);
 }
 
 .green-gradient-bg {
@@ -78,11 +91,19 @@ body {
   padding: 0.5rem;
   border-style: dotted;
   border-width: 2px;
-  border-color: rgb(87, 217, 87);
+  border-color: var(--garden-border-color);
+  box-shadow: 1px 1px 10px var(--garden-border-shadow-color);
+
+  box-shadow: 0 0 0 10px var(--grass-color),
+    calc(100% - 10px) 0 0 10px var(--grass-color),
+    0 calc(100% - 10px) 0 10px var(--grass-color),
+    calc(100% - 10px) calc(100% - 10px) 0 10px var(--grass-color);
 }
 
-:root {
-  --grass-color: rgb(87, 217, 87);
+.garden-divider {
+  border-style: dotted;
+  border-width: 2px;
+  border-color: var(--grass-color);
 }
 
 .grass-pixel-art {
@@ -97,4 +118,58 @@ body {
   height: 2px;
   width: 2px;
   z-index: -1;
+}
+
+.grass-field {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+}
+
+.grass-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 2px dotted var(--grass-color);
+  height: 100%;
+  width: 100%;
+  min-height: 3rem;
+  overflow: hidden;
+}
+
+.wide-block {
+  grid-column: span 2;
+}
+
+.tall-block {
+  grid-row: span 2;
+}
+
+.special-block {
+  background-color: var(--light-green-text-color);
+}
+
+.participant-text {
+  animation: fadeIn 0.5s ease-in,
+    spin 8s ease-in-out infinite var(--spin-delay, 0.5s);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotateY(0deg);
+  }
+  20%,
+  100% {
+    transform: rotateY(360deg);
+  }
 }

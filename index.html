@@ -10,9 +10,11 @@
   </head>
 
   <body class="green-gradient-bg w-screen min-h-screen">
-    <div class="p-4 sm:p-6 md:p-8 lg:p-16 flex flex-col lg:flex-row gap-8">
+    <div
+      class="p-4 sm:p-6 md:p-8 lg:p-16 flex flex-col lg:flex-row gap-8 align-center"
+    >
       <!-- Left Side -->
-      <section class="flex flex-col gap-6 green-text max-w-md">
+      <section class="flex flex-col gap-6 green-text max-w-md m-auto">
         <!-- TITLE -->
         <h1 class="text-xl font-bold">HTML Day 2025 Shanghai</h1>
 
@@ -95,10 +97,10 @@
 
       <!-- Right Side -->
       <section
-        class="flex flex-col gap-6 lg:col-span-1 lg:row-span-1 min-w-md max-w-lg"
+        class="flex flex-col gap-6 lg:col-span-1 lg:row-span-1 min-w-md w-full align-center"
       >
         <!-- 报名表单 -->
-        <div class="max-w-md green-text">
+        <section class="max-w-md green-text m-auto lg:m-0">
           <form id="rsvp-form" class="flex flex-col gap-2">
             <fieldset class="garden-border px-4 pb-2">
               <legend class="px-2 dark-green-text text-center">
@@ -108,7 +110,7 @@
                 <div>你的邮箱 →</div>
                 <input
                   type="email"
-                  id="emailInput"
+                  id="email-input"
                   placeholder="电子邮件 / Email"
                   required
                 />
@@ -119,28 +121,28 @@
                 <input
                   type="text"
                   class="input-box w-42"
-                  id="nameInput"
+                  id="name-input"
                   placeholder="名字 / Name"
                   required
                 />
                 <div>← Your Name</div>
               </div>
 
-              <div class="input-section">
+              <!-- <div class="input-section">
                 <div>选个颜色 →</div>
                 <input
                   type="color"
                   class="input-box w-42"
-                  id="colorInput"
+                  id="color-input"
                   placeholder="颜色 / Color"
                   required
                 />
                 <div>← Pick a Color</div>
-              </div>
+              </div> -->
 
               <div class="input-section">
                 <div>来吗？ →</div>
-                <select id="rsvpStatus" class="w-42" required>
+                <select id="rsvp-status" class="w-42" required>
                   <option value="">咋说? / Yeah?</option>
                   <option value="Going">确定会来/ Going</option>
                   <option value="Maybe">可能来 / Maybe</option>
@@ -148,15 +150,15 @@
                 </select>
                 <div>← Will you come?</div>
               </div>
-              <hr class="my-4 border-dotted border-[rgb(87,217,87)]" />
+              <hr class="my-4 garden-divider" />
               <div
                 class="flex flex-row justify-between items-center mb-2 dark-green-text"
               >
                 <div>｀、ヽ｀、｀、ヽ</div>
                 <button
                   type="submit"
+                  id="submit-button"
                   class="cursor-pointer bg-gray-100 hover:bg-gray-200 border-2 border-gray-300 border-dashed w-42"
-                  onclick="submitForm()"
                 >
                   提交 / Submit
                 </button>
@@ -164,13 +166,70 @@
               </div>
             </fieldset>
           </form>
-        </div>
-        <!-- <div class="grass-pixel-art"></div> -->
+        </section>
+
+        <!-- 草坪 Grass field -->
+        <div class="grass-field w-full h-full"></div>
       </section>
     </div>
   </body>
 
+  <!-- Functions -->
   <script>
+    const API_BASE_URL = 'https://html-energy-sh-2025.val.run';
+    const ALL_PARTICIPANTS = [];
+    const PARTICIPANT_EMAIL_INDICES_MAP = {};
+
+    async function fetchRSVPs() {
+      try {
+        const response = await fetch(`${API_BASE_URL}/rsvps`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const allRSVPs = await response.json();
+        console.log('Fetched RSVPs:', allRSVPs);
+        ALL_PARTICIPANTS.push(...allRSVPs);
+      } catch (error) {
+        console.error('Failed to fetch RSVPs:', error);
+        // Fallback to existing hardcoded names if API fails
+        console.log('Using fallback data');
+      }
+    }
+
+    async function handleRSVPSubmission(event) {
+      event.preventDefault();
+      const email = document.getElementById('email-input').value.trim();
+      const name = document.getElementById('name-input').value.trim();
+      const color = '#000000';
+      const rsvpStatus = document.getElementById('rsvp-status').value;
+
+      const rsvpData = {
+        Email: email,
+        Name: name,
+        Color: color,
+        RSVP: rsvpStatus,
+      };
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/rsvps`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(rsvpData),
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const newRSVP = await response.json();
+        console.log('New RSVP:', newRSVP);
+        ALL_PARTICIPANTS.push(newRSVP);
+        updateGrassBlocks(ALL_PARTICIPANTS);
+      } catch (error) {
+        console.error('Failed to submit RSVP:', error);
+      }
+    }
+
     function placeRandomGrass(count) {
       const OPACITY_RANGE = [0.2, 0.8];
       const HORIZONTAL_STEPS = 50;
@@ -189,9 +248,105 @@
       }
     }
 
-    // Place 20 random grass pixels when page loads
-    window.addEventListener('load', () => {
+    function insertGrassBlocks(count) {
+      const blocksToInsert = [];
+
+      const locationBlock = document.createElement('div');
+      locationBlock.className =
+        'grass-block wide-block special-block green-text';
+      locationBlock.textContent = '中山公园 Zhongshan Park';
+
+      const timeBlock = document.createElement('div');
+      timeBlock.className = 'grass-block wide-block special-block green-text';
+      timeBlock.textContent = 'August 1, 2025 16:30-19:00 (tentative)';
+
+      blocksToInsert.push(locationBlock);
+      for (let i = 0; i < count - 4; i++) {
+        const grassBlock = document.createElement('div');
+        grassBlock.className = 'grass-block';
+        blocksToInsert.push(grassBlock);
+      }
+      blocksToInsert.push(timeBlock);
+
+      const grassField = document.querySelector('.grass-field');
+
+      blocksToInsert.forEach((block) => {
+        grassField.appendChild(block);
+      });
+    }
+
+    function updateGrassBlocks(participants) {
+      const grassField = document.querySelector('.grass-field');
+      const grassBlocks = grassField.querySelectorAll(
+        '.grass-block:not(.special-block)'
+      );
+      // Randomly pick indices for each participant
+      // and make sure no index is repeated
+      const randomizedIndices = [];
+      const existingIndices = Object.values(PARTICIPANT_EMAIL_INDICES_MAP);
+
+      for (const participant of participants) {
+        // Skip if email already has an assigned index
+        if (PARTICIPANT_EMAIL_INDICES_MAP[participant.Email] !== undefined) {
+          continue;
+        }
+
+        // Keep trying until we find an unused index
+        while (true) {
+          const randomIndex = Math.floor(Math.random() * grassBlocks.length);
+          if (
+            !randomizedIndices.includes(randomIndex) &&
+            !existingIndices.includes(randomIndex)
+          ) {
+            randomizedIndices.push(randomIndex);
+            // Update map with new index
+            PARTICIPANT_EMAIL_INDICES_MAP[participant.Email] = randomIndex;
+            break;
+          }
+        }
+      }
+
+      // Update grass blocks
+      participants.forEach((participant) => {
+        const index = PARTICIPANT_EMAIL_INDICES_MAP[participant.Email];
+
+        const participantText = document.createElement('div');
+        participantText.className = 'participant-text px-4 green-text';
+        participantText.innerHTML = participant.Name;
+        let initialRotation;
+        do {
+          initialRotation = Math.random() * 30 - 15; // Random between -30 and +30
+        } while (initialRotation >= -5 && initialRotation <= 5);
+
+        participantText.style.rotate = `${initialRotation}deg`;
+        const randomDelay = Math.random() * 5; // Random float between 1 and 5
+        participantText.style.setProperty('--spin-delay', `${randomDelay}s`);
+
+        if (grassBlocks[index].children.length > 0) {
+          // Replace existing content
+          grassBlocks[index].children[0].innerHTML = participant.Name;
+        } else {
+          grassBlocks[index].appendChild(participantText);
+        }
+      });
+    }
+  </script>
+
+  <!-- Setup -->
+  <script>
+    window.addEventListener('load', async () => {
       placeRandomGrass(100);
+
+      const specialElements = [];
+      insertGrassBlocks(36);
+
+      await fetchRSVPs();
+      console.log(ALL_PARTICIPANTS);
+      updateGrassBlocks(ALL_PARTICIPANTS);
     });
+
+    document
+      .getElementById('submit-button')
+      .addEventListener('click', handleRSVPSubmission);
   </script>
 </html>
